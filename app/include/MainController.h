@@ -9,12 +9,11 @@
 namespace app {
 
 class MainController : public engine::core::Controller {
-    void initialize() override;
-
 public:
     std::string_view name() const override;
 
 private:
+    void initialize() override;
     bool loop() override;
     void draw() override;
     void draw_backpack();
