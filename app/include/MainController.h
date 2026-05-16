@@ -13,6 +13,9 @@ class MainController : public engine::core::Controller {
 
 public:
     std::string_view name() const override;
+
+private:
+    bool loop() override;
 };
 
 } // app
