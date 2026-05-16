@@ -12,9 +12,21 @@
 #include <engine/resources/ResourcesController.hpp>
 
 namespace app {
+    class MainPlatformEventObserver : public engine::platform::PlatformEventObserver {
+    public:
+        void on_mouse_move(engine::platform::MousePosition position) override;
+    };
+
+    void MainPlatformEventObserver::on_mouse_move(engine::platform::MousePosition position) {
+        auto camera = engine::core::Controller::get<engine::graphics::GraphicsController>()->camera();
+        camera->rotate_camera(position.dx, position.dy);
+    }
+
     void MainController::initialize() {
-        spdlog::info("MainController initialized");
+        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+        platform->register_platform_event_observer(std::make_unique<MainPlatformEventObserver>());
         engine::graphics::OpenGL::enable_depth_testing();
+        spdlog::info("MainController initialized");
     }
 
     std::string_view MainController::name() const {
@@ -60,6 +72,30 @@ namespace app {
     void MainController::end_draw() {
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
         platform->swap_buffers();
+    }
+
+    void MainController::update_camera() {
+        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+        auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+        auto camera = graphics->camera();
+        float dt = platform->dt();
+
+        if(platform->key(engine::platform::KeyId::KEY_W).is_down()) {
+            camera->move_camera(engine::graphics::Camera::Movement::FORWARD, dt);
+        }
+        if(platform->key(engine::platform::KeyId::KEY_S).is_down()) {
+            camera->move_camera(engine::graphics::Camera::Movement::BACKWARD, dt);
+        }
+        if(platform->key(engine::platform::KeyId::KEY_A).is_down()) {
+            camera->move_camera(engine::graphics::Camera::Movement::LEFT, dt);
+        }
+        if(platform->key(engine::platform::KeyId::KEY_D).is_down()) {
+            camera->move_camera(engine::graphics::Camera::Movement::RIGHT, dt);
+        }
+    }
+
+    void MainController::update() {
+        update_camera();
     }
 
 } // app
