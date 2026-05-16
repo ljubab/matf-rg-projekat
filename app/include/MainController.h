@@ -16,6 +16,10 @@ public:
 
 private:
     bool loop() override;
+    void draw() override;
+    void draw_backpack();
+    void begin_draw() override;
+    void end_draw() override;
 };
 
 } // app
