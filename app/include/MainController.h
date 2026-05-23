@@ -20,6 +20,7 @@ private:
     void begin_draw() override;
     void end_draw() override;
     void update_camera();
+    void draw_skybox();
     void update() override;
 };
 

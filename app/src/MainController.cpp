@@ -4,8 +4,10 @@
 
 #include "../include/MainController.h"
 
+#include "GUIController.h"
 #include "spdlog/spdlog.h"
 
+#include <engine/core/App.hpp>
 #include <engine/graphics/GraphicsController.hpp>
 #include <engine/graphics/OpenGL.hpp>
 #include <engine/platform/PlatformController.hpp>
@@ -18,6 +20,11 @@ namespace app {
     };
 
     void MainPlatformEventObserver::on_mouse_move(engine::platform::MousePosition position) {
+        auto gui_controller = engine::core::Controller::get<GUIController>();
+        if(gui_controller->is_enabled()) {
+            return;
+        }
+
         auto camera = engine::core::Controller::get<engine::graphics::GraphicsController>()->camera();
         camera->rotate_camera(position.dx, position.dy);
     }
@@ -62,10 +69,18 @@ namespace app {
         engine::graphics::OpenGL::clear_buffers();
     }
 
+    void MainController::draw_skybox() {
+        auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
+        auto skybox = resources->skybox("mountain_skybox");
+        auto shader = resources->shader("skybox");
+        auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+        graphics->draw_skybox(shader, skybox);
+    }
 
     void MainController::draw() {
         // clear buffers (color buffer, depth buffer)
         draw_backpack();
+        draw_skybox();
         // swapBuffers
     }
 
@@ -75,6 +90,11 @@ namespace app {
     }
 
     void MainController::update_camera() {
+        auto gui_controller = engine::core::Controller::get<GUIController>();
+        if(gui_controller->is_enabled()) {
+            return;
+        }
+
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
         auto camera = graphics->camera();
