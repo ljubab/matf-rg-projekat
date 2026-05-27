@@ -69,6 +69,8 @@ namespace app {
         // Model
         auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+
         engine::resources::Model * shiba = resources->model("shiba");
         // Shader
         engine::resources::Shader * shader = resources->shader("basic");
@@ -80,6 +82,7 @@ namespace app {
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-3.0, 0.0, -3.0));
         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+        model = glm::rotate(model, platform->frame_time().current, glm::vec3(0.0f, 0.0f, 1.0f));
         model = glm::scale(model, glm::vec3(0.3f));
         shader->set_mat4("model", model);
 
