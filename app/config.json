@@ -3,6 +3,10 @@
     "models": {
       "backpack": {
         "path": "backpack/backpack.obj"
+      },
+      "shiba": {
+        "path": "shiba/scene.gltf",
+        "flip_uvs": true
       }
     }
   },
