@@ -7,6 +7,9 @@
       "shiba": {
         "path": "shiba/scene.gltf",
         "flip_uvs": true
+      },
+      "house": {
+        "path": "lowpoly_house/house.obj"
       }
     }
   },

@@ -1,0 +1,80 @@
+newmtl Grass
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/Grass.png
+
+newmtl Bricks
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/Bricks.png
+
+newmtl House
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/House.png
+
+newmtl Window
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/Window.png
+
+newmtl Roof
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/Roof.png
+
+newmtl Wood
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/Wood.png
+
+newmtl Door
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/Door.png
+
+newmtl DoorKnob
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/DoorKnob.png
+
+newmtl Ground
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/Ground.png
+
+newmtl RoofTiles
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+d 1.0
+illum 1
+map_Kd textures/RoofTiles.png
+
