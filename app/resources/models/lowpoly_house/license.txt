@@ -1,0 +1,11 @@
+Model Information:
+* title:	Lowpoly Cartoon House
+* source:	https://sketchfab.com/3d-models/lowpoly-cartoon-house-5f099e35fbaa4c64aa05418de59ea0ba
+* author:	Vitor Figueredo (https://sketchfab.com/vitor.figueredo)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Lowpoly Cartoon House" (https://sketchfab.com/3d-models/lowpoly-cartoon-house-5f099e35fbaa4c64aa05418de59ea0ba) by Vitor Figueredo (https://sketchfab.com/vitor.figueredo) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
