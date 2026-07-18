@@ -23,6 +23,7 @@ private:
     void update_camera();
     void draw_skybox();
     void draw_house();
+    void draw_rick();
     void update() override;
 };
 

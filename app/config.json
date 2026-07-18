@@ -10,6 +10,9 @@
       },
       "house": {
         "path": "lowpoly_house/house.obj"
+      },
+      "rick": {
+        "path": "rick_sanchez/rick.obj"
       }
     }
   },
