@@ -82,7 +82,16 @@ namespace app {
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.5, 0.31, -1.0));
         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-        model = glm::rotate(model, platform->frame_time().current, glm::vec3(0.0f, 0.0f, 1.0f));
+
+        if(platform->key(engine::platform::KeyId::KEY_R).state() == engine::platform::Key::State::JustPressed) {
+            shiba_rotating ^= 1;
+        }
+
+        if(shiba_rotating) {
+            shiba_rotation_angle += platform->dt();
+        }
+
+        model = glm::rotate(model, shiba_rotation_angle, glm::vec3(0.0f, 0.0f, 1.0f));
         model = glm::scale(model, glm::vec3(0.3f));
         shader->set_mat4("model", model);
 

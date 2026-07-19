@@ -11,8 +11,10 @@ namespace app {
 class MainController : public engine::core::Controller {
 public:
     std::string_view name() const override;
-
 private:
+    bool shiba_rotating = true;
+    float shiba_rotation_angle = 0.0f;
+
     void initialize() override;
     bool loop() override;
     void draw() override;
