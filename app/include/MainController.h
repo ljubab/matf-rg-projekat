@@ -24,6 +24,7 @@ private:
     void draw_skybox();
     void draw_house();
     void draw_rick();
+    void draw_griffin();
     void update() override;
 };
 

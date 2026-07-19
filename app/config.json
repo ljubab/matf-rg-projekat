@@ -13,6 +13,10 @@
       },
       "rick": {
         "path": "rick_sanchez/rick.obj"
+      },
+      "griffin": {
+        "path": "peter_griffin/scene.gltf",
+        "flip_uvs": true
       }
     }
   },

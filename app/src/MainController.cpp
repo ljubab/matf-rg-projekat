@@ -132,6 +132,28 @@ namespace app {
         rick->draw(shader);
     }
 
+    void MainController::draw_griffin() {
+        // Model
+        auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
+        auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+
+        engine::resources::Model * griffin = resources->model("griffin");
+        // Shader
+        engine::resources::Shader * shader = resources->shader("basic");
+
+        shader->use();
+        shader->set_mat4("projection", graphics->projection_matrix());
+        shader->set_mat4("view", graphics->camera()->view_matrix());
+
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-1.0, 0.0, 1.0));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.5f));
+        shader->set_mat4("model", model);
+
+        griffin->draw(shader);
+    }
+
     void MainController::begin_draw() {
         engine::graphics::OpenGL::clear_buffers();
     }
@@ -151,6 +173,7 @@ namespace app {
         draw_shiba();
         draw_house();
         draw_rick();
+        draw_griffin();
         // swapBuffers
     }
 
