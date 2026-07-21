@@ -6,6 +6,8 @@
 #define MAINCONTROLLER_H
 #include <engine/core/Controller.hpp>
 
+#include "DirectionalLight.h"
+
 namespace app {
 
 class MainController : public engine::core::Controller {
@@ -28,6 +30,8 @@ private:
     void draw_rick();
     void draw_griffin();
     void update() override;
+
+    DirectionalLight dirLight;
 };
 
 } // app

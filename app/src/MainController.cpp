@@ -13,6 +13,8 @@
 #include <engine/platform/PlatformController.hpp>
 #include <engine/resources/ResourcesController.hpp>
 
+#include "../include/DirectionalLight.h"
+
 namespace app {
     class MainPlatformEventObserver : public engine::platform::PlatformEventObserver {
     public:
@@ -34,6 +36,13 @@ namespace app {
         platform->register_platform_event_observer(std::make_unique<MainPlatformEventObserver>());
         engine::graphics::OpenGL::enable_depth_testing();
         spdlog::info("MainController initialized");
+
+        dirLight = DirectionalLight{
+            glm::vec3(-1.0f, 0.0f, 1.0f),
+            glm::vec3(0.3f, 0.3f, 0.3f),
+            glm::vec3(1.0f, 1.0f, 1.0f),
+            glm::vec3(0.5f, 0.5f, 0.5f)
+        };
     }
 
     std::string_view MainController::name() const {
@@ -126,11 +135,18 @@ namespace app {
 
         engine::resources::Model * rick = resources->model("rick");
         // Shader
-        engine::resources::Shader * shader = resources->shader("basic");
+        engine::resources::Shader * shader = resources->shader("directLight");
 
         shader->use();
         shader->set_mat4("projection", graphics->projection_matrix());
         shader->set_mat4("view", graphics->camera()->view_matrix());
+
+        shader->set_vec3("viewPos", graphics->camera()->Position);
+        dirLight.apply(shader);
+        shader->set_float("material.ambient", 0.3f);
+        shader->set_float("material.diffuse", 1.0f);
+        shader->set_float("material.specular", 0.5f);
+        shader->set_float("material.shiness", 32.0f);
 
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.0, 0.0, 0.0));
