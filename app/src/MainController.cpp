@@ -38,7 +38,7 @@ namespace app {
         spdlog::info("MainController initialized");
 
         dirLight = DirectionalLight{
-            glm::vec3(-1.0f, 0.0f, 1.0f),
+            glm::vec3(-1.0f, 1.0f, 1.0f),
             glm::vec3(0.3f, 0.3f, 0.3f),
             glm::vec3(1.0f, 1.0f, 1.0f),
             glm::vec3(0.5f, 0.5f, 0.5f)
@@ -114,11 +114,18 @@ namespace app {
 
         engine::resources::Model * house = resources->model("house");
         // Shader
-        engine::resources::Shader * shader = resources->shader("basic");
+        engine::resources::Shader * shader = resources->shader("directLight");
 
         shader->use();
         shader->set_mat4("projection", graphics->projection_matrix());
         shader->set_mat4("view", graphics->camera()->view_matrix());
+
+        shader->set_vec3("viewPos", graphics->camera()->Position);
+        dirLight.apply(shader);
+        shader->set_float("material.ambient", 0.3f);
+        shader->set_float("material.diffuse", 1.0f);
+        shader->set_float("material.specular", 0.5f);
+        shader->set_float("material.shiness", 32.0f);
 
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-3.0, 0.0, 0.0));
