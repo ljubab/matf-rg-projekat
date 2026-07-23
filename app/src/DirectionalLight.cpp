@@ -4,14 +4,14 @@
 #include "../include/DirectionalLight.h"
 
 DirectionalLight::DirectionalLight()
-    : direction(glm::vec3(1.0f, 0.0f, 0.0f)), ambient(glm::vec3(1.0f, 1.0f, 1.0f)), diffuse(glm::vec3(1.0f, 1.0f, 1.0f)),
+    : direction(0.0f, 0.0f, 0.0f), ambient(glm::vec3(1.0f, 1.0f, 1.0f)), diffuse(glm::vec3(1.0f, 1.0f, 1.0f)),
     specular(glm::vec3(1.0f, 1.0f, 1.0f)) {}
 
 DirectionalLight::DirectionalLight(glm::vec3 direction, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular)
-    : direction(glm::normalize(direction)), ambient(ambient), diffuse(diffuse), specular(specular) {}
+    : direction(direction), ambient(ambient), diffuse(diffuse), specular(specular) {}
 
 void DirectionalLight::setDirection(glm::vec3 new_direction) {
-    direction = glm::normalize(new_direction);
+    direction = new_direction;
 }
 
 void DirectionalLight::setAmbient(glm::vec3 new_ambient) {

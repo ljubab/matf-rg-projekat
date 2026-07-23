@@ -36,13 +36,6 @@ namespace app {
         platform->register_platform_event_observer(std::make_unique<MainPlatformEventObserver>());
         engine::graphics::OpenGL::enable_depth_testing();
         spdlog::info("MainController initialized");
-
-        dirLight = DirectionalLight{
-            glm::vec3(-0.94f, 0.5f, 0.0f),
-            glm::vec3(0.3f, 0.3f, 0.3f),
-            glm::vec3(1.0f, 1.0f, 1.0f),
-            glm::vec3(0.5f, 0.5f, 0.5f)
-        };
     }
 
     std::string_view MainController::name() const {
@@ -59,6 +52,7 @@ namespace app {
         auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+        auto gui_controller = engine::core::Controller::get<GUIController>();
 
         engine::resources::Model * shiba = resources->model("shiba");
         // Shader
@@ -68,8 +62,10 @@ namespace app {
         shader->set_mat4("projection", graphics->projection_matrix());
         shader->set_mat4("view", graphics->camera()->view_matrix());
 
+        DirectionalLight dir_light = gui_controller->dir_light;
+
         shader->set_vec3("viewPos", graphics->camera()->Position);
-        dirLight.apply(shader);
+        dir_light.apply(shader);
         shader->set_float("material.ambient", 0.3f);
         shader->set_float("material.diffuse", 1.0f);
         shader->set_float("material.specular", 0.5f);
@@ -98,6 +94,7 @@ namespace app {
         // Model
         auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+        auto gui_controller = engine::core::Controller::get<GUIController>();
 
         engine::resources::Model * house = resources->model("house");
         // Shader
@@ -107,8 +104,10 @@ namespace app {
         shader->set_mat4("projection", graphics->projection_matrix());
         shader->set_mat4("view", graphics->camera()->view_matrix());
 
+        DirectionalLight dir_light = gui_controller->dir_light;
+
         shader->set_vec3("viewPos", graphics->camera()->Position);
-        dirLight.apply(shader);
+        dir_light.apply(shader);
         shader->set_float("material.ambient", 0.3f);
         shader->set_float("material.diffuse", 1.0f);
         shader->set_float("material.specular", 0.5f);
@@ -126,6 +125,7 @@ namespace app {
         // Model
         auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+        auto gui_controller = engine::core::Controller::get<GUIController>();
 
         engine::resources::Model * rick = resources->model("rick");
         // Shader
@@ -135,8 +135,10 @@ namespace app {
         shader->set_mat4("projection", graphics->projection_matrix());
         shader->set_mat4("view", graphics->camera()->view_matrix());
 
+        DirectionalLight dir_light = gui_controller->dir_light;
+
         shader->set_vec3("viewPos", graphics->camera()->Position);
-        dirLight.apply(shader);
+        dir_light.apply(shader);
         shader->set_float("material.ambient", 0.3f);
         shader->set_float("material.diffuse", 1.0f);
         shader->set_float("material.specular", 0.5f);
@@ -155,6 +157,7 @@ namespace app {
         // Model
         auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+        auto gui_controller = engine::core::Controller::get<GUIController>();
 
         engine::resources::Model * griffin = resources->model("griffin");
         // Shader
@@ -164,8 +167,10 @@ namespace app {
         shader->set_mat4("projection", graphics->projection_matrix());
         shader->set_mat4("view", graphics->camera()->view_matrix());
 
+        DirectionalLight dir_light = gui_controller->dir_light;
+
         shader->set_vec3("viewPos", graphics->camera()->Position);
-        dirLight.apply(shader);
+        dir_light.apply(shader);
         shader->set_float("material.ambient", 0.3f);
         shader->set_float("material.diffuse", 1.0f);
         shader->set_float("material.specular", 0.5f);

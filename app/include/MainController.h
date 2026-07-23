@@ -30,8 +30,6 @@ private:
     void draw_rick();
     void draw_griffin();
     void update() override;
-
-    DirectionalLight dirLight;
 };
 
 } // app

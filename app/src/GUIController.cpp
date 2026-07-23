@@ -7,6 +7,7 @@
 #include <engine/graphics/GraphicsController.hpp>
 #include <engine/platform/PlatformController.hpp>
 #include <imgui.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace app {
     std::string_view GUIController::name() const {
@@ -15,6 +16,12 @@ namespace app {
 
     void GUIController::initialize() {
         set_enable(false);
+        dir_light = DirectionalLight{
+            glm::vec3(-0.94f, 0.5f, 0.0f),
+            glm::vec3(0.3f, 0.3f, 0.3f),
+            glm::vec3(1.0f, 1.0f, 1.0f),
+            glm::vec3(0.5f, 0.5f, 0.5f)
+        };
     }
 
     void GUIController::poll_events() {
@@ -30,9 +37,29 @@ namespace app {
         auto camera = graphics->camera();
         graphics->begin_gui();
 
-        ImGui::Begin("Camera info");
+        ImGui::Begin("Camera info & Lightning");
         ImGui::Text("Camera position: (%f, %f, %f)", camera->Position.x, camera->Position.y, camera->Position.z);
         ImGui::Text("Camera front: (%f, %f, %f)", camera->Front.x, camera->Front.y, camera->Front.z);
+
+        glm::vec3 dir = dir_light.getDirection();
+        if(ImGui::SliderFloat3("Direction", glm::value_ptr(dir), -10.0f, 10.0f)) {
+            dir_light.setDirection(dir);
+        }
+
+        glm::vec3 ambient = dir_light.getAmbient();
+        if(ImGui::SliderFloat3("Ambient", glm::value_ptr(ambient), 0.0f, 1.0f)) {
+            dir_light.setAmbient(ambient);
+        }
+
+        glm::vec3 diffuse = dir_light.getDiffuse();
+        if(ImGui::SliderFloat3("Diffuse", glm::value_ptr(diffuse), 0.0f, 1.0f)) {
+            dir_light.setDiffuse(diffuse);
+        }
+
+        glm::vec3 specular = dir_light.getSpecular();
+        if(ImGui::SliderFloat3("Specular", glm::value_ptr(specular), 0.0f, 1.0f)) {
+            dir_light.setSpecular(specular);
+        }
 
         ImGui::End();
 

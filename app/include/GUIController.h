@@ -5,6 +5,8 @@
 #ifndef GUICONTROLLER_H
 #define GUICONTROLLER_H
 #include <engine/core/Controller.hpp>
+#include "DirectionalLight.h"
+#include <../../engine/libs/glm/glm/glm.hpp>
 
 namespace app {
 
@@ -13,6 +15,7 @@ class GUIController : public engine::core::Controller {
 
 public:
     std::string_view name() const override;
+    DirectionalLight dir_light;
 
 private:
     void draw() override;
