@@ -54,26 +54,6 @@ namespace app {
         return !platform->key(engine::platform::KeyId::KEY_ESCAPE).is_down();
     }
 
-    void MainController::draw_backpack() {
-        // Model
-        auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
-        auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
-        engine::resources::Model * backpack = resources->model("backpack");
-        // Shader
-        engine::resources::Shader * shader = resources->shader("basic");
-
-        shader->use();
-        shader->set_mat4("projection", graphics->projection_matrix());
-        shader->set_mat4("view", graphics->camera()->view_matrix());
-
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0, 0.0, -3.0));
-        model = glm::scale(model, glm::vec3(0.3f));
-        shader->set_mat4("model", model);
-
-        backpack->draw(shader);
-    }
-
     void MainController::draw_shiba() {
         // Model
         auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
@@ -214,7 +194,6 @@ namespace app {
 
     void MainController::draw() {
         // clear buffers (color buffer, depth buffer)
-        draw_backpack();
         draw_skybox();
         draw_shiba();
         draw_house();
