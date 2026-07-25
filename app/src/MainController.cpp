@@ -51,7 +51,6 @@ namespace app {
         // Model
         auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
-        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
         auto gui_controller = engine::core::Controller::get<GUIController>();
 
         engine::resources::Model * shiba = resources->model("shiba");
@@ -76,14 +75,6 @@ namespace app {
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.5, 0.31, -1.0));
         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-
-        if(platform->key(engine::platform::KeyId::KEY_R).state() == engine::platform::Key::State::JustPressed) {
-            shiba_rotating ^= 1;
-        }
-
-        if(shiba_rotating) {
-            shiba_rotation_angle += platform->dt();
-        }
 
         model = glm::rotate(model, shiba_rotation_angle, glm::vec3(0.0f, 0.0f, 1.0f));
         model = glm::scale(model, glm::vec3(0.3f));
@@ -259,9 +250,22 @@ namespace app {
         spotlight.setDirection(camera->Front);
     }
 
+    void MainController::update_shiba() {
+        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+
+        if(platform->key(engine::platform::KeyId::KEY_R).state() == engine::platform::Key::State::JustPressed) {
+            shiba_rotating ^= 1;
+        }
+
+        if(shiba_rotating) {
+            shiba_rotation_angle += platform->dt();
+        }
+    }
+
     void MainController::update() {
         update_camera();
         update_spotlight();
+        update_shiba();
     }
 
 } // app

@@ -34,6 +34,7 @@ private:
     void draw_griffin();
     void update() override;
     void update_spotlight();
+    void update_shiba();
 };
 
 } // app
