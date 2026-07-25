@@ -7,6 +7,7 @@
 #include <engine/core/Controller.hpp>
 
 #include "DirectionalLight.h"
+#include "SpotLight.h"
 
 namespace app {
 
@@ -16,6 +17,8 @@ public:
 private:
     bool shiba_rotating = true;
     float shiba_rotation_angle = 0.0f;
+
+    SpotLight spotlight;
 
     void initialize() override;
     bool loop() override;
@@ -30,6 +33,7 @@ private:
     void draw_rick();
     void draw_griffin();
     void update() override;
+    void update_spotlight();
 };
 
 } // app

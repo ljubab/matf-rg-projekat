@@ -43,8 +43,8 @@ glm::vec3 DirectionalLight::getSpecular() const {
 }
 
 void DirectionalLight::apply(engine::resources::Shader* shader) const {
-    shader->set_vec3("light.direction", direction);
-    shader->set_vec3("light.ambient", ambient);
-    shader->set_vec3("light.diffuse", diffuse);
-    shader->set_vec3("light.specular", specular);
+    shader->set_vec3("dirLight.direction", direction);
+    shader->set_vec3("dirLight.ambient", ambient);
+    shader->set_vec3("dirLight.diffuse", diffuse);
+    shader->set_vec3("dirLight.specular", specular);
 }

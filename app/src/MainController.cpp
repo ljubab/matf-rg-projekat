@@ -71,6 +71,8 @@ namespace app {
         shader->set_float("material.specular", 0.5f);
         shader->set_float("material.shiness", 32.0f);
 
+        spotlight.apply(shader);
+
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.5, 0.31, -1.0));
         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -113,6 +115,8 @@ namespace app {
         shader->set_float("material.specular", 0.5f);
         shader->set_float("material.shiness", 32.0f);
 
+        spotlight.apply(shader);
+
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-3.0, 0.0, 0.0));
         model = glm::scale(model, glm::vec3(0.3f));
@@ -143,6 +147,8 @@ namespace app {
         shader->set_float("material.diffuse", 1.0f);
         shader->set_float("material.specular", 0.5f);
         shader->set_float("material.shiness", 32.0f);
+
+        spotlight.apply(shader);
 
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.0, 0.0, 0.0));
@@ -175,6 +181,8 @@ namespace app {
         shader->set_float("material.diffuse", 1.0f);
         shader->set_float("material.specular", 0.5f);
         shader->set_float("material.shiness", 32.0f);
+
+        spotlight.apply(shader);
 
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.0, 0.0, 1.0));
@@ -237,8 +245,23 @@ namespace app {
         }
     }
 
+    void MainController::update_spotlight() {
+        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+        auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+        auto camera = graphics->camera();
+
+        if(platform->key(engine::platform::KeyId::KEY_F).state() == engine::platform::Key::State::JustPressed) {
+            spdlog::info("Pritisnuo");
+            spotlight.toggle();
+        }
+
+        spotlight.setPosition(camera->Position);
+        spotlight.setDirection(camera->Front);
+    }
+
     void MainController::update() {
         update_camera();
+        update_spotlight();
     }
 
 } // app
