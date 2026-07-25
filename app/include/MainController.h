@@ -17,6 +17,7 @@ public:
 private:
     bool shiba_rotating = true;
     float shiba_rotation_angle = 0.0f;
+    bool lighting_enabled = true;
 
     SpotLight spotlight;
 
@@ -35,6 +36,7 @@ private:
     void update() override;
     void update_spotlight();
     void update_shiba();
+    void update_lighting();
 };
 
 } // app

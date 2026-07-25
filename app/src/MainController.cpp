@@ -55,7 +55,7 @@ namespace app {
 
         engine::resources::Model * shiba = resources->model("shiba");
         // Shader
-        engine::resources::Shader * shader = resources->shader("directLight");
+        engine::resources::Shader * shader = resources->shader(lighting_enabled ? "lighting" : "basic");
 
         shader->use();
         shader->set_mat4("projection", graphics->projection_matrix());
@@ -91,7 +91,7 @@ namespace app {
 
         engine::resources::Model * house = resources->model("house");
         // Shader
-        engine::resources::Shader * shader = resources->shader("directLight");
+        engine::resources::Shader * shader = resources->shader(lighting_enabled ? "lighting" : "basic");
 
         shader->use();
         shader->set_mat4("projection", graphics->projection_matrix());
@@ -124,7 +124,7 @@ namespace app {
 
         engine::resources::Model * rick = resources->model("rick");
         // Shader
-        engine::resources::Shader * shader = resources->shader("directLight");
+        engine::resources::Shader * shader = resources->shader(lighting_enabled ? "lighting" : "basic");
 
         shader->use();
         shader->set_mat4("projection", graphics->projection_matrix());
@@ -158,7 +158,7 @@ namespace app {
 
         engine::resources::Model * griffin = resources->model("griffin");
         // Shader
-        engine::resources::Shader * shader = resources->shader("directLight");
+        engine::resources::Shader * shader = resources->shader(lighting_enabled ? "lighting" : "basic");
 
         shader->use();
         shader->set_mat4("projection", graphics->projection_matrix());
@@ -242,7 +242,6 @@ namespace app {
         auto camera = graphics->camera();
 
         if(platform->key(engine::platform::KeyId::KEY_F).state() == engine::platform::Key::State::JustPressed) {
-            spdlog::info("Pritisnuo");
             spotlight.toggle();
         }
 
@@ -262,10 +261,19 @@ namespace app {
         }
     }
 
+    void MainController::update_lighting() {
+        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+
+        if(platform->key(engine::platform::KeyId::KEY_Q).state() == engine::platform::Key::State::JustPressed) {
+            lighting_enabled ^= 1;
+        }
+    }
+
     void MainController::update() {
         update_camera();
         update_spotlight();
         update_shiba();
+        update_lighting();
     }
 
 } // app
