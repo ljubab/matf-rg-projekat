@@ -35,6 +35,7 @@ namespace app {
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
         platform->register_platform_event_observer(std::make_unique<MainPlatformEventObserver>());
         engine::graphics::OpenGL::enable_depth_testing();
+        engine::graphics::OpenGL::create_framebuffer(platform->window()->width(), platform->window()->height());
         spdlog::info("MainController initialized");
     }
 
@@ -186,6 +187,7 @@ namespace app {
 
     void MainController::begin_draw() {
         engine::graphics::OpenGL::clear_buffers();
+        engine::graphics::OpenGL::bind_framebuffer();
     }
 
     void MainController::draw_skybox() {
@@ -207,6 +209,14 @@ namespace app {
     }
 
     void MainController::end_draw() {
+        engine::graphics::OpenGL::unbind_framebuffer();
+
+        auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
+        engine::resources::Shader * postprocessing = resources->shader("postprocessing");
+        postprocessing->use();
+        postprocessing->set_int("screenTexture", 0);
+        engine::graphics::OpenGL::draw_framebuffer();
+
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
         platform->swap_buffers();
     }
