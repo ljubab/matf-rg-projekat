@@ -215,6 +215,10 @@ namespace app {
         engine::resources::Shader * postprocessing = resources->shader("postprocessing");
         postprocessing->use();
         postprocessing->set_int("screenTexture", 0);
+
+        auto gui_controller = engine::core::Controller::get<GUIController>();
+        postprocessing->set_int("postprocessingType", gui_controller->get_postprocessing());
+
         engine::graphics::OpenGL::draw_framebuffer();
 
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();

@@ -38,31 +38,51 @@ namespace app {
         graphics->begin_gui();
 
         ImGui::Begin("Camera info & Lightning");
-        ImGui::Text("Camera position: (%f, %f, %f)", camera->Position.x, camera->Position.y, camera->Position.z);
-        ImGui::Text("Camera front: (%f, %f, %f)", camera->Front.x, camera->Front.y, camera->Front.z);
+        ImGui::BeginTabBar("MyTabBarID");
 
-        glm::vec3 dir = dir_light.getDirection();
-        if(ImGui::SliderFloat3("Direction", glm::value_ptr(dir), -10.0f, 10.0f)) {
-            dir_light.setDirection(dir);
+        if(ImGui::BeginTabItem("Lighting")) {
+            ImGui::Text("Camera position: (%f, %f, %f)", camera->Position.x, camera->Position.y, camera->Position.z);
+            ImGui::Text("Camera front: (%f, %f, %f)", camera->Front.x, camera->Front.y, camera->Front.z);
+
+            glm::vec3 dir = dir_light.getDirection();
+            if(ImGui::SliderFloat3("Direction", glm::value_ptr(dir), -10.0f, 10.0f)) {
+                dir_light.setDirection(dir);
+            }
+
+            glm::vec3 ambient = dir_light.getAmbient();
+            if(ImGui::SliderFloat3("Ambient", glm::value_ptr(ambient), 0.0f, 1.0f)) {
+                dir_light.setAmbient(ambient);
+            }
+
+            glm::vec3 diffuse = dir_light.getDiffuse();
+            if(ImGui::SliderFloat3("Diffuse", glm::value_ptr(diffuse), 0.0f, 1.0f)) {
+                dir_light.setDiffuse(diffuse);
+            }
+
+            glm::vec3 specular = dir_light.getSpecular();
+            if(ImGui::SliderFloat3("Specular", glm::value_ptr(specular), 0.0f, 1.0f)) {
+                dir_light.setSpecular(specular);
+            }
+
+            ImGui::EndTabItem();
         }
 
-        glm::vec3 ambient = dir_light.getAmbient();
-        if(ImGui::SliderFloat3("Ambient", glm::value_ptr(ambient), 0.0f, 1.0f)) {
-            dir_light.setAmbient(ambient);
+        if(ImGui::BeginTabItem("Postprocessing")) {
+            ImGui::RadioButton("None", reinterpret_cast<int*>(&m_postprocessing_type), PostprocessingType::None);
+            ImGui::RadioButton("Inversion", reinterpret_cast<int*>(&m_postprocessing_type), PostprocessingType::Inversion);
+            ImGui::RadioButton("Grayscale", reinterpret_cast<int*>(&m_postprocessing_type), PostprocessingType::Grayscale);
+            ImGui::RadioButton("Kernel", reinterpret_cast<int*>(&m_postprocessing_type), PostprocessingType::Kernel);
+            ImGui::EndTabItem();
         }
 
-        glm::vec3 diffuse = dir_light.getDiffuse();
-        if(ImGui::SliderFloat3("Diffuse", glm::value_ptr(diffuse), 0.0f, 1.0f)) {
-            dir_light.setDiffuse(diffuse);
-        }
-
-        glm::vec3 specular = dir_light.getSpecular();
-        if(ImGui::SliderFloat3("Specular", glm::value_ptr(specular), 0.0f, 1.0f)) {
-            dir_light.setSpecular(specular);
-        }
-
+        ImGui::EndTabBar();
         ImGui::End();
 
         graphics->end_gui();
     }
+
+    int GUIController::get_postprocessing() const {
+        return m_postprocessing_type;
+    }
+
 } // app

@@ -9,7 +9,12 @@
 #include <../../engine/libs/glm/glm/glm.hpp>
 
 namespace app {
-
+enum PostprocessingType {
+    None = 0,
+    Inversion = 1,
+    Grayscale = 2,
+    Kernel = 3
+};
 class GUIController : public engine::core::Controller {
     void initialize() override;
 
@@ -17,9 +22,12 @@ public:
     std::string_view name() const override;
     DirectionalLight dir_light;
 
+    int get_postprocessing() const;
 private:
     void draw() override;
     void poll_events() override;
+
+    PostprocessingType m_postprocessing_type = None;
 };
 
 } // app
