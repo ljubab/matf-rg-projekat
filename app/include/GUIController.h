@@ -23,6 +23,7 @@ public:
     DirectionalLight dir_light;
 
     int get_postprocessing() const;
+    void render();
 private:
     void draw() override;
     void poll_events() override;

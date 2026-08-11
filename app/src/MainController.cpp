@@ -221,6 +221,10 @@ namespace app {
 
         engine::graphics::OpenGL::draw_framebuffer();
 
+        if(gui_controller->is_enabled()) {
+            gui_controller->render();
+        }
+
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
         platform->swap_buffers();
     }

@@ -31,8 +31,11 @@ namespace app {
         }
     }
 
-
     void GUIController::draw() {
+
+    }
+
+    void GUIController::render() {
         auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
         auto camera = graphics->camera();
         graphics->begin_gui();
