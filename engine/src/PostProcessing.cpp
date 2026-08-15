@@ -11,7 +11,7 @@
 #include <engine/util/Errors.hpp>
 
 void PostProcessing::create_framebuffer(int SCR_WIDTH, int SCR_HEIGHT) {
-    if(m_framebuffer_params.initialized) {
+    if (m_framebuffer_params.initialized) {
         destroy_framebuffer();
     }
 
@@ -30,22 +30,21 @@ void PostProcessing::create_framebuffer(int SCR_WIDTH, int SCR_HEIGHT) {
     CHECKED_GL_CALL(glRenderbufferStorage, GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
     CHECKED_GL_CALL(glFramebufferRenderbuffer, GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_framebuffer_params.rbo);
 
-    if(CHECKED_GL_CALL(glCheckFramebufferStatus, GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+    if (CHECKED_GL_CALL(glCheckFramebufferStatus, GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
         throw engine::util::Error("Framebuffer is not complete!");
     }
 
     CHECKED_GL_CALL(glBindFramebuffer, GL_FRAMEBUFFER, 0);
 
     float quadVertices[] = {
-        // positions   // texCoords
-        -1.0f,  1.0f,  0.0f, 1.0f,
-        -1.0f, -1.0f,  0.0f, 0.0f,
-         1.0f, -1.0f,  1.0f, 0.0f,
+            // positions   // texCoords
+            -1.0f, 1.0f, 0.0f, 1.0f,
+            -1.0f, -1.0f, 0.0f, 0.0f,
+            1.0f, -1.0f, 1.0f, 0.0f,
 
-        -1.0f,  1.0f,  0.0f, 1.0f,
-         1.0f, -1.0f,  1.0f, 0.0f,
-         1.0f,  1.0f,  1.0f, 1.0f
-    };
+            -1.0f, 1.0f, 0.0f, 1.0f,
+            1.0f, -1.0f, 1.0f, 0.0f,
+            1.0f, 1.0f, 1.0f, 1.0f};
 
     CHECKED_GL_CALL(glGenVertexArrays, 1, &m_framebuffer_params.quad_vao);
     CHECKED_GL_CALL(glGenBuffers, 1, &m_framebuffer_params.quad_vbo);
@@ -53,9 +52,9 @@ void PostProcessing::create_framebuffer(int SCR_WIDTH, int SCR_HEIGHT) {
     CHECKED_GL_CALL(glBindBuffer, GL_ARRAY_BUFFER, m_framebuffer_params.quad_vbo);
     CHECKED_GL_CALL(glBufferData, GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
     CHECKED_GL_CALL(glEnableVertexAttribArray, 0);
-    CHECKED_GL_CALL(glVertexAttribPointer, 0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+    CHECKED_GL_CALL(glVertexAttribPointer, 0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) 0);
     CHECKED_GL_CALL(glEnableVertexAttribArray, 1);
-    CHECKED_GL_CALL(glVertexAttribPointer, 1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+    CHECKED_GL_CALL(glVertexAttribPointer, 1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) (2 * sizeof(float)));
 
     m_framebuffer_params.initialized = true;
 }

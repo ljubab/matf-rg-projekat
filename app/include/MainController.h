@@ -14,6 +14,7 @@ namespace app {
 class MainController : public engine::core::Controller {
 public:
     std::string_view name() const override;
+
 private:
     bool shiba_rotating = true;
     float shiba_rotation_angle = 0.0f;
@@ -39,6 +40,6 @@ private:
     void update_lighting();
 };
 
-} // app
+}// namespace app
 
-#endif //MAINCONTROLLER_H
+#endif//MAINCONTROLLER_H

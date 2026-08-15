@@ -140,6 +140,7 @@ public:
     * @returns shader compilation error message.
     */
     static std::string get_compilation_error_message(uint32_t shader_id);
+
 private:
     /**
     * @brief Throws an engine::util::EngineError of type @ref engine::util::EngineError::Type::OpenGLError if an OpenGL error occurred. Used internally.

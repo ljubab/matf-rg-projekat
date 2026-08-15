@@ -10,11 +10,11 @@
 struct SpotLight {
     SpotLight();
     SpotLight(bool enabled, glm::vec3 position, glm::vec3 direction, float cutOff, float outerCutOff,
-               float constant, float linear, float quadratic,
-               glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
+              float constant, float linear, float quadratic,
+              glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
 
     void toggle();
-    void apply(engine::resources::Shader * shader) const;
+    void apply(engine::resources::Shader *shader) const;
 
     bool enabled;
 
@@ -32,4 +32,4 @@ struct SpotLight {
     glm::vec3 specular;
 };
 
-#endif //SPOTLIGHT_H
+#endif//SPOTLIGHT_H

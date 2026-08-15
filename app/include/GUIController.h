@@ -4,9 +4,9 @@
 
 #ifndef GUICONTROLLER_H
 #define GUICONTROLLER_H
-#include <engine/core/Controller.hpp>
 #include "DirectionalLight.h"
 #include <../../engine/libs/glm/glm/glm.hpp>
+#include <engine/core/Controller.hpp>
 
 namespace app {
 enum PostprocessingType {
@@ -24,6 +24,7 @@ public:
 
     int get_postprocessing() const;
     void render();
+
 private:
     void draw() override;
     void poll_events() override;
@@ -31,6 +32,6 @@ private:
     PostprocessingType m_postprocessing_type = None;
 };
 
-} // app
+}// namespace app
 
-#endif //GUICONTROLLER_H
+#endif//GUICONTROLLER_H

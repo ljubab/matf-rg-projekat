@@ -12,7 +12,7 @@ struct DirectionalLight {
     DirectionalLight();
     DirectionalLight(glm::vec3 direction, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
 
-    void apply(engine::resources::Shader * shader) const;
+    void apply(engine::resources::Shader *shader) const;
 
     glm::vec3 direction;
 
@@ -22,5 +22,4 @@ struct DirectionalLight {
 };
 
 
-
-#endif //DIRECTIONALLIGHT_H
+#endif//DIRECTIONALLIGHT_H
