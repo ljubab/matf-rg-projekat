@@ -263,8 +263,8 @@ namespace app {
             spotlight.toggle();
         }
 
-        spotlight.setPosition(camera->Position);
-        spotlight.setDirection(camera->Front);
+        spotlight.position = camera->Position;
+        spotlight.direction = glm::normalize(camera->Front);
     }
 
     void MainController::update_shiba() {
