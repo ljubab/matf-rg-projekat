@@ -232,7 +232,7 @@ void OpenGL::create_framebuffer(int SCR_WIDTH, int SCR_HEIGHT) {
     CHECKED_GL_CALL(glFramebufferRenderbuffer, GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_framebuffer_params.rbo);
 
     if(CHECKED_GL_CALL(glCheckFramebufferStatus, GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        spdlog::warn("Framebuffer is not complete!");
+        throw util::Error("Framebuffer is not complete!");
     }
 
     CHECKED_GL_CALL(glBindFramebuffer, GL_FRAMEBUFFER, 0);
