@@ -47,24 +47,24 @@ namespace app {
             ImGui::Text("Camera position: (%f, %f, %f)", camera->Position.x, camera->Position.y, camera->Position.z);
             ImGui::Text("Camera front: (%f, %f, %f)", camera->Front.x, camera->Front.y, camera->Front.z);
 
-            glm::vec3 dir = dir_light.getDirection();
+            glm::vec3 dir = dir_light.direction;
             if(ImGui::SliderFloat3("Direction", glm::value_ptr(dir), -10.0f, 10.0f)) {
-                dir_light.setDirection(dir);
+                dir_light.direction = dir;
             }
 
-            glm::vec3 ambient = dir_light.getAmbient();
+            glm::vec3 ambient = dir_light.ambient;
             if(ImGui::SliderFloat3("Ambient", glm::value_ptr(ambient), 0.0f, 1.0f)) {
-                dir_light.setAmbient(ambient);
+                dir_light.ambient = ambient;
             }
 
-            glm::vec3 diffuse = dir_light.getDiffuse();
+            glm::vec3 diffuse = dir_light.diffuse;
             if(ImGui::SliderFloat3("Diffuse", glm::value_ptr(diffuse), 0.0f, 1.0f)) {
-                dir_light.setDiffuse(diffuse);
+                dir_light.diffuse = diffuse;
             }
 
-            glm::vec3 specular = dir_light.getSpecular();
+            glm::vec3 specular = dir_light.specular;
             if(ImGui::SliderFloat3("Specular", glm::value_ptr(specular), 0.0f, 1.0f)) {
-                dir_light.setSpecular(specular);
+                dir_light.specular = specular;
             }
 
             ImGui::EndTabItem();

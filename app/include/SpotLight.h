@@ -8,7 +8,6 @@
 #include <../../engine/include/engine/resources/Shader.hpp>
 
 struct SpotLight {
-public:
     SpotLight();
     SpotLight(bool enabled, glm::vec3 position, glm::vec3 direction, float cutOff, float outerCutOff,
                float constant, float linear, float quadratic,
