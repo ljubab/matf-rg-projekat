@@ -35,7 +35,7 @@ namespace app {
         auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
         platform->register_platform_event_observer(std::make_unique<MainPlatformEventObserver>());
         engine::graphics::OpenGL::enable_depth_testing();
-        engine::graphics::OpenGL::create_framebuffer(platform->window()->width(), platform->window()->height());
+        PostProcessing::getInstance().create_framebuffer(platform->window()->width(), platform->window()->height());
         spdlog::info("MainController initialized");
     }
 
@@ -187,7 +187,7 @@ namespace app {
 
     void MainController::begin_draw() {
         engine::graphics::OpenGL::clear_buffers();
-        engine::graphics::OpenGL::bind_framebuffer();
+        PostProcessing::getInstance().bind_framebuffer();
     }
 
     void MainController::draw_skybox() {
@@ -209,7 +209,7 @@ namespace app {
     }
 
     void MainController::end_draw() {
-        engine::graphics::OpenGL::unbind_framebuffer();
+        PostProcessing::getInstance().unbind_framebuffer();
 
         auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
         engine::resources::Shader * postprocessing = resources->shader("postprocessing");
@@ -219,7 +219,7 @@ namespace app {
         auto gui_controller = engine::core::Controller::get<GUIController>();
         postprocessing->set_int("postprocessingType", gui_controller->get_postprocessing());
 
-        engine::graphics::OpenGL::draw_framebuffer();
+        PostProcessing::getInstance().draw_framebuffer();
 
         if(gui_controller->is_enabled()) {
             gui_controller->render();

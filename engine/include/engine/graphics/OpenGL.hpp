@@ -29,17 +29,6 @@ class Skybox;
 
 namespace engine::graphics {
 /**
-* @brief Parameters used to define a Framebuffer.
-*/
-struct FramebufferParams {
-  unsigned int framebuffer = -1;
-  unsigned int textureColorBuffer = -1;
-  unsigned int rbo = -1;
-  unsigned int quad_vao = -1;
-  unsigned int quad_vbo = -1;
-  bool initialized = false;
-};
-/**
 * @class OpenGL
 * @brief This class serves as the OpenGL interface for your app, since the engine doesn't directly link OpenGL to the app executable.
 *
@@ -151,39 +140,12 @@ public:
     * @returns shader compilation error message.
     */
     static std::string get_compilation_error_message(uint32_t shader_id);
-
-    /**
-    * @brief Initialize framebuffer.
-    */
-    static void create_framebuffer(int SCR_WIDTH, int SCR_HEIGHT);
-
-    /**
-     * @brief Destroy framebuffer.
-     */
-    static void destroy_framebuffer();
-
-    /**
-     * @brief Bind framebuffer.
-     */
-    static void bind_framebuffer();
-
-    /**
-     * @brief Unbind framebuffer.
-     */
-    static void unbind_framebuffer();
-
-    /**
-     * @brief Draw framebuffer.
-     */
-    static void draw_framebuffer();
 private:
     /**
     * @brief Throws an engine::util::EngineError of type @ref engine::util::EngineError::Type::OpenGLError if an OpenGL error occurred. Used internally.
     * @param location Source location from where the OpenGL call was made.
     */
     static void assert_no_error(std::source_location location);
-
-    static FramebufferParams m_framebuffer_params;
 };
 }// namespace engine::graphics
 #endif//OPENGL_HPP
