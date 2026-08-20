@@ -16,11 +16,11 @@ public:
     std::string_view name() const override;
 
 private:
-    bool shiba_rotating = true;
-    float shiba_rotation_angle = 0.0f;
-    bool lighting_enabled = true;
+    bool m_shiba_rotating = true;
+    float m_shiba_rotation_angle = 0.0f;
+    bool m_lighting_enabled = true;
 
-    SpotLight spotlight;
+    SpotLight m_spotlight;
 
     void initialize() override;
     bool loop() override;

@@ -2,7 +2,7 @@
 // Created by ljuba on 7/24/26.
 //
 
-#include "../include/SpotLight.h"
+#include "SpotLight.h"
 
 #include <glm/glm.hpp>
 

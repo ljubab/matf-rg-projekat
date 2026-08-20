@@ -2,7 +2,6 @@
 // clang-format off
 #include <glad/glad.h>
 // clang-format on
-#include "spdlog/spdlog.h"
 
 
 #include <array>

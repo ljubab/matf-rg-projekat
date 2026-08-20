@@ -1,6 +1,6 @@
 /**
  * @file Skybox.hpp
- * @brief Defines the Skybox class that serves as the interface for mountain_skybox rendering.
+ * @brief Defines the Skybox class that serves as the interface for skybox rendering.
 */
 
 #ifndef SKYBOX_HPP

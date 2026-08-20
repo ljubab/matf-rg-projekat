@@ -5,8 +5,8 @@
 #ifndef DIRECTIONALLIGHT_H
 #define DIRECTIONALLIGHT_H
 
-#include <../../engine/include/engine/resources/Shader.hpp>
-#include <../../engine/libs/glm/glm/glm.hpp>
+#include <engine/resources/Shader.hpp>
+#include <glm/glm.hpp>
 
 struct DirectionalLight {
     DirectionalLight();

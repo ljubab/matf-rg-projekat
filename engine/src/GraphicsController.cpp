@@ -40,7 +40,7 @@ void GraphicsController::initialize() {
     RG_GUARANTEE(ImGui_ImplGlfw_InitForOpenGL(handle, true), "ImGUI failed to initialize for OpenGL");
     RG_GUARANTEE(ImGui_ImplOpenGL3_Init("#version 330 core"), "ImGUI failed to initialize for OpenGL");
 
-    PostProcessing::getInstance().create_framebuffer(platform->window()->width(), platform->window()->height());
+    PostProcessing::get_instance().create_framebuffer(platform->window()->width(), platform->window()->height());
 }
 
 void GraphicsController::terminate() {
@@ -50,7 +50,7 @@ void GraphicsController::terminate() {
         ImGui::DestroyContext();
     }
 
-    PostProcessing::getInstance().destroy_framebuffer();
+    PostProcessing::get_instance().destroy_framebuffer();
 }
 
 void GraphicsPlatformEventObserver::on_window_resize(int width, int height) {
@@ -60,7 +60,7 @@ void GraphicsPlatformEventObserver::on_window_resize(int width, int height) {
     m_graphics->orthographic_params().Top = static_cast<float>(height);
     CHECKED_GL_CALL(glViewport, 0, 0, width, height);
 
-    PostProcessing::getInstance().create_framebuffer(width, height);
+    PostProcessing::get_instance().create_framebuffer(width, height);
 }
 
 std::string_view GraphicsController::name() const {

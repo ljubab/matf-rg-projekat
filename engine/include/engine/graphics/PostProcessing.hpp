@@ -5,14 +5,12 @@
 #ifndef POSTPROCESSING_H
 #define POSTPROCESSING_H
 
-#define CHECKED_GL_CALL(func, ...) engine::graphics::OpenGL::call(std::source_location::current(), func __VA_OPT__(, ) __VA_ARGS__)
-
 /**
 * @brief Parameters used to define a Framebuffer.
 */
 struct FramebufferParams {
     unsigned int framebuffer = -1;
-    unsigned int textureColorBuffer = -1;
+    unsigned int texture_color_buffer = -1;
     unsigned int rbo = -1;
     unsigned int quad_vao = -1;
     unsigned int quad_vbo = -1;
@@ -25,7 +23,7 @@ public:
     PostProcessing(const PostProcessing &) = delete;
     PostProcessing &operator=(const PostProcessing &) = delete;
 
-    static PostProcessing &getInstance() {
+    static PostProcessing &get_instance() {
         static PostProcessing instance;
         return instance;
     }
@@ -33,7 +31,7 @@ public:
     /**
     * @brief Initialize framebuffer.
     */
-    void create_framebuffer(int SCR_WIDTH, int SCR_HEIGHT);
+    void create_framebuffer(int scr_width, int scr_height);
 
     /**
      * @brief Destroy framebuffer.

@@ -5,7 +5,6 @@
 #ifndef GUICONTROLLER_H
 #define GUICONTROLLER_H
 #include "DirectionalLight.h"
-#include <../../engine/libs/glm/glm/glm.hpp>
 #include <engine/core/Controller.hpp>
 
 namespace app {

@@ -2,7 +2,7 @@
 // Created by ljuba on 5/16/26.
 //
 
-#include "../include/MainController.h"
+#include "MainController.h"
 
 #include "GUIController.h"
 #include "spdlog/spdlog.h"
@@ -13,7 +13,7 @@
 #include <engine/platform/PlatformController.hpp>
 #include <engine/resources/ResourcesController.hpp>
 
-#include "../include/DirectionalLight.h"
+#include "DirectionalLight.h"
 
 namespace app {
 class MainPlatformEventObserver : public engine::platform::PlatformEventObserver {
@@ -35,7 +35,6 @@ void MainController::initialize() {
     auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
     platform->register_platform_event_observer(std::make_unique<MainPlatformEventObserver>());
     engine::graphics::OpenGL::enable_depth_testing();
-    PostProcessing::getInstance().create_framebuffer(platform->window()->width(), platform->window()->height());
     spdlog::info("MainController initialized");
 }
 
@@ -56,7 +55,7 @@ void MainController::draw_shiba() {
 
     engine::resources::Model *shiba = resources->model("shiba");
     // Shader
-    engine::resources::Shader *shader = resources->shader(lighting_enabled ? "lighting" : "basic");
+    engine::resources::Shader *shader = resources->shader(m_lighting_enabled ? "lighting" : "basic");
 
     shader->use();
     shader->set_mat4("projection", graphics->projection_matrix());
@@ -71,13 +70,13 @@ void MainController::draw_shiba() {
     shader->set_float("material.specular", 0.5f);
     shader->set_float("material.shiness", 32.0f);
 
-    spotlight.apply(shader);
+    m_spotlight.apply(shader);
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(-1.5, 0.31, -1.0));
     model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
-    model = glm::rotate(model, shiba_rotation_angle, glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::rotate(model, m_shiba_rotation_angle, glm::vec3(0.0f, 0.0f, 1.0f));
     model = glm::scale(model, glm::vec3(0.3f));
     shader->set_mat4("model", model);
 
@@ -92,7 +91,7 @@ void MainController::draw_house() {
 
     engine::resources::Model *house = resources->model("house");
     // Shader
-    engine::resources::Shader *shader = resources->shader(lighting_enabled ? "lighting" : "basic");
+    engine::resources::Shader *shader = resources->shader(m_lighting_enabled ? "lighting" : "basic");
 
     shader->use();
     shader->set_mat4("projection", graphics->projection_matrix());
@@ -107,7 +106,7 @@ void MainController::draw_house() {
     shader->set_float("material.specular", 0.5f);
     shader->set_float("material.shiness", 32.0f);
 
-    spotlight.apply(shader);
+    m_spotlight.apply(shader);
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(-3.0, 0.0, 0.0));
@@ -125,7 +124,7 @@ void MainController::draw_rick() {
 
     engine::resources::Model *rick = resources->model("rick");
     // Shader
-    engine::resources::Shader *shader = resources->shader(lighting_enabled ? "lighting" : "basic");
+    engine::resources::Shader *shader = resources->shader(m_lighting_enabled ? "lighting" : "basic");
 
     shader->use();
     shader->set_mat4("projection", graphics->projection_matrix());
@@ -140,7 +139,7 @@ void MainController::draw_rick() {
     shader->set_float("material.specular", 0.5f);
     shader->set_float("material.shiness", 32.0f);
 
-    spotlight.apply(shader);
+    m_spotlight.apply(shader);
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(-1.0, 0.0, 0.0));
@@ -159,7 +158,7 @@ void MainController::draw_griffin() {
 
     engine::resources::Model *griffin = resources->model("griffin");
     // Shader
-    engine::resources::Shader *shader = resources->shader(lighting_enabled ? "lighting" : "basic");
+    engine::resources::Shader *shader = resources->shader(m_lighting_enabled ? "lighting" : "basic");
 
     shader->use();
     shader->set_mat4("projection", graphics->projection_matrix());
@@ -174,7 +173,7 @@ void MainController::draw_griffin() {
     shader->set_float("material.specular", 0.5f);
     shader->set_float("material.shiness", 32.0f);
 
-    spotlight.apply(shader);
+    m_spotlight.apply(shader);
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(-1.0, 0.0, 1.0));
@@ -187,7 +186,7 @@ void MainController::draw_griffin() {
 
 void MainController::begin_draw() {
     engine::graphics::OpenGL::clear_buffers();
-    PostProcessing::getInstance().bind_framebuffer();
+    PostProcessing::get_instance().bind_framebuffer();
 }
 
 void MainController::draw_skybox() {
@@ -209,7 +208,7 @@ void MainController::draw() {
 }
 
 void MainController::end_draw() {
-    PostProcessing::getInstance().unbind_framebuffer();
+    PostProcessing::get_instance().unbind_framebuffer();
 
     auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
     engine::resources::Shader *postprocessing = resources->shader("postprocessing");
@@ -219,7 +218,7 @@ void MainController::end_draw() {
     auto gui_controller = engine::core::Controller::get<GUIController>();
     postprocessing->set_int("postprocessingType", gui_controller->get_postprocessing());
 
-    PostProcessing::getInstance().draw_framebuffer();
+    PostProcessing::get_instance().draw_framebuffer();
 
     if (gui_controller->is_enabled()) {
         gui_controller->render();
@@ -260,22 +259,22 @@ void MainController::update_spotlight() {
     auto camera = graphics->camera();
 
     if (platform->key(engine::platform::KeyId::KEY_F).state() == engine::platform::Key::State::JustPressed) {
-        spotlight.toggle();
+        m_spotlight.toggle();
     }
 
-    spotlight.position = camera->Position;
-    spotlight.direction = glm::normalize(camera->Front);
+    m_spotlight.position = camera->Position;
+    m_spotlight.direction = glm::normalize(camera->Front);
 }
 
 void MainController::update_shiba() {
     auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
 
     if (platform->key(engine::platform::KeyId::KEY_R).state() == engine::platform::Key::State::JustPressed) {
-        shiba_rotating ^= 1;
+        m_shiba_rotating ^= 1;
     }
 
-    if (shiba_rotating) {
-        shiba_rotation_angle += platform->dt();
+    if (m_shiba_rotating) {
+        m_shiba_rotation_angle += platform->dt();
     }
 }
 
@@ -283,7 +282,7 @@ void MainController::update_lighting() {
     auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
 
     if (platform->key(engine::platform::KeyId::KEY_Q).state() == engine::platform::Key::State::JustPressed) {
-        lighting_enabled ^= 1;
+        m_lighting_enabled ^= 1;
     }
 }
 

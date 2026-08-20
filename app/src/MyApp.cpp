@@ -2,7 +2,7 @@
 // Created by ljuba on 5/16/26.
 //
 
-#include "../include/MyApp.h"
+#include "MyApp.h"
 
 #include "GUIController.h"
 #include "MainController.h"

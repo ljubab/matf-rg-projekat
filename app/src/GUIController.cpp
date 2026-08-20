@@ -2,7 +2,7 @@
 // Created by ljuba on 5/16/26.
 //
 
-#include "../include/GUIController.h"
+#include "GUIController.h"
 
 #include <engine/graphics/GraphicsController.hpp>
 #include <engine/platform/PlatformController.hpp>

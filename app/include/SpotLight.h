@@ -5,7 +5,7 @@
 #ifndef SPOTLIGHT_H
 #define SPOTLIGHT_H
 #include "glm/vec3.hpp"
-#include <../../engine/include/engine/resources/Shader.hpp>
+#include <engine/resources/Shader.hpp>
 
 struct SpotLight {
     SpotLight();

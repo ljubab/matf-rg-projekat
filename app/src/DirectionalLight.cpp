@@ -1,7 +1,7 @@
 //
 // Created by ljuba on 7/20/26.
 //
-#include "../include/DirectionalLight.h"
+#include "DirectionalLight.h"
 
 DirectionalLight::DirectionalLight()
     : direction(0.0f, 0.0f, 0.0f)
