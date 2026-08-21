@@ -92,5 +92,3 @@ void PostProcessing::draw_framebuffer() {
     CHECKED_GL_CALL(glBindTexture, GL_TEXTURE_2D, 0);
     CHECKED_GL_CALL(glEnable, GL_DEPTH_TEST);
 }
-
-PostProcessing::PostProcessing() = default;

@@ -186,7 +186,9 @@ void MainController::draw_griffin() {
 
 void MainController::begin_draw() {
     engine::graphics::OpenGL::clear_buffers();
-    PostProcessing::get_instance().bind_framebuffer();
+    auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+    auto &post_processing = graphics->post_processing;
+    post_processing.bind_framebuffer();
 }
 
 void MainController::draw_skybox() {
@@ -208,7 +210,9 @@ void MainController::draw() {
 }
 
 void MainController::end_draw() {
-    PostProcessing::get_instance().unbind_framebuffer();
+    auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
+    auto &post_processing = graphics->post_processing;
+    post_processing.unbind_framebuffer();
 
     auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
     engine::resources::Shader *postprocessing = resources->shader("postprocessing");
@@ -218,7 +222,7 @@ void MainController::end_draw() {
     auto gui_controller = engine::core::Controller::get<GUIController>();
     postprocessing->set_int("postprocessingType", gui_controller->get_postprocessing());
 
-    PostProcessing::get_instance().draw_framebuffer();
+    post_processing.draw_framebuffer();
 
     if (gui_controller->is_enabled()) {
         gui_controller->render();

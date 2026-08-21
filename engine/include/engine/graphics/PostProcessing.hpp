@@ -19,14 +19,6 @@ struct FramebufferParams {
 //Singleton class
 class PostProcessing {
 public:
-    PostProcessing(const PostProcessing &) = delete;
-    PostProcessing &operator=(const PostProcessing &) = delete;
-
-    static PostProcessing &get_instance() {
-        static PostProcessing instance;
-        return instance;
-    }
-
     /**
     * @brief Initialize framebuffer.
     */
@@ -53,7 +45,6 @@ public:
     void draw_framebuffer();
 
 private:
-    PostProcessing();
     FramebufferParams m_framebuffer_params;
 };
 
