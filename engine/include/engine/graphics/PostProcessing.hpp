@@ -5,6 +5,7 @@
 #ifndef POSTPROCESSING_H
 #define POSTPROCESSING_H
 
+namespace engine::graphics {
 /**
 * @brief Parameters used to define a Framebuffer.
 */
@@ -48,5 +49,6 @@ private:
     FramebufferParams m_framebuffer_params;
 };
 
+}
 
 #endif//POSTPROCESSING_H

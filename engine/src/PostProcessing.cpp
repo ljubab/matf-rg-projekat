@@ -10,6 +10,7 @@
 #include <engine/graphics/PostProcessing.hpp>
 #include <engine/util/Errors.hpp>
 
+namespace engine::graphics {
 void PostProcessing::create_framebuffer(int scr_width, int scr_height) {
     if (!m_framebuffer_params.framebuffer) {
         destroy_framebuffer();
@@ -37,14 +38,14 @@ void PostProcessing::create_framebuffer(int scr_width, int scr_height) {
     CHECKED_GL_CALL(glBindFramebuffer, GL_FRAMEBUFFER, 0);
 
     float quadVertices[] = {
-            // positions   // texCoords
-            -1.0f, 1.0f, 0.0f, 1.0f,
-            -1.0f, -1.0f, 0.0f, 0.0f,
-            1.0f, -1.0f, 1.0f, 0.0f,
+        // positions   // texCoords
+        -1.0f, 1.0f, 0.0f, 1.0f,
+        -1.0f, -1.0f, 0.0f, 0.0f,
+        1.0f, -1.0f, 1.0f, 0.0f,
 
-            -1.0f, 1.0f, 0.0f, 1.0f,
-            1.0f, -1.0f, 1.0f, 0.0f,
-            1.0f, 1.0f, 1.0f, 1.0f};
+        -1.0f, 1.0f, 0.0f, 1.0f,
+        1.0f, -1.0f, 1.0f, 0.0f,
+        1.0f, 1.0f, 1.0f, 1.0f};
 
     CHECKED_GL_CALL(glGenVertexArrays, 1, &m_framebuffer_params.quad_vao);
     CHECKED_GL_CALL(glGenBuffers, 1, &m_framebuffer_params.quad_vbo);
@@ -91,4 +92,6 @@ void PostProcessing::draw_framebuffer() {
     CHECKED_GL_CALL(glBindVertexArray, 0);
     CHECKED_GL_CALL(glBindTexture, GL_TEXTURE_2D, 0);
     CHECKED_GL_CALL(glEnable, GL_DEPTH_TEST);
+}
+
 }
