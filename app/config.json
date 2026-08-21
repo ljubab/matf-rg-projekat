@@ -1,11 +1,25 @@
 {
   "resources": {
     "models": {
+      "shiba": {
+        "path": "shiba/scene.gltf",
+        "flip_uvs": true
+      },
+      "house": {
+        "path": "lowpoly_house/house.obj"
+      },
+      "rick": {
+        "path": "rick_sanchez/rick.obj"
+      },
+      "griffin": {
+        "path": "peter_griffin/scene.gltf",
+        "flip_uvs": true
+      }
     }
   },
   "window": {
-    "height": 600,
+    "height": 1200,
     "title": "Hello, window!",
-    "width": 800
+    "width": 1600
   }
 }

@@ -6,6 +6,9 @@
 #ifndef GRAPHICSCONTROLLER_HPP
 #define GRAPHICSCONTROLLER_HPP
 
+#include "PostProcessing.hpp"
+
+
 #include <engine/core/Controller.hpp>
 #include <engine/graphics/Camera.hpp>
 #include <engine/platform/PlatformEventObserver.hpp>
@@ -57,6 +60,7 @@ enum ProjectionType {
 class GraphicsController final : public core::Controller {
 public:
     std::string_view name() const override;
+    PostProcessing post_processing;
 
     /**
     * @brief Calls internal methods for the beginning of gui drawing. Should be called in pair with @ref GraphicsController::end_gui.

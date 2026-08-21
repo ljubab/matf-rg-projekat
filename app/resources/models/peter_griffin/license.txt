@@ -1,0 +1,11 @@
+Model Information:
+* title:	Peter Griffin
+* source:	https://sketchfab.com/3d-models/peter-griffin-253c345752ec43f18f4a7d906312a1c3
+* author:	timedrfreeman (https://sketchfab.com/timedrfreeman)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Peter Griffin" (https://sketchfab.com/3d-models/peter-griffin-253c345752ec43f18f4a7d906312a1c3) by timedrfreeman (https://sketchfab.com/timedrfreeman) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
