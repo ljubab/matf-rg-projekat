@@ -11,7 +11,7 @@
 #include <engine/util/Errors.hpp>
 
 void PostProcessing::create_framebuffer(int scr_width, int scr_height) {
-    if (m_framebuffer_params.initialized) {
+    if (!m_framebuffer_params.framebuffer) {
         destroy_framebuffer();
     }
 
@@ -55,8 +55,6 @@ void PostProcessing::create_framebuffer(int scr_width, int scr_height) {
     CHECKED_GL_CALL(glVertexAttribPointer, 0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) 0);
     CHECKED_GL_CALL(glEnableVertexAttribArray, 1);
     CHECKED_GL_CALL(glVertexAttribPointer, 1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *) (2 * sizeof(float)));
-
-    m_framebuffer_params.initialized = true;
 }
 
 void PostProcessing::destroy_framebuffer() {
@@ -69,8 +67,6 @@ void PostProcessing::destroy_framebuffer() {
     CHECKED_GL_CALL(glDeleteFramebuffers, 1, &m_framebuffer_params.framebuffer);
     CHECKED_GL_CALL(glDeleteVertexArrays, 1, &m_framebuffer_params.quad_vao);
     CHECKED_GL_CALL(glDeleteBuffers, 1, &m_framebuffer_params.quad_vbo);
-
-    m_framebuffer_params.initialized = false;
 }
 
 void PostProcessing::bind_framebuffer() {

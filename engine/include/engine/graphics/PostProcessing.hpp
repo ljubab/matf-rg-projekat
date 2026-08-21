@@ -9,12 +9,11 @@
 * @brief Parameters used to define a Framebuffer.
 */
 struct FramebufferParams {
-    unsigned int framebuffer = -1;
-    unsigned int texture_color_buffer = -1;
-    unsigned int rbo = -1;
-    unsigned int quad_vao = -1;
-    unsigned int quad_vbo = -1;
-    bool initialized = false;
+    unsigned int framebuffer = 0;
+    unsigned int texture_color_buffer = 0;
+    unsigned int rbo = 0;
+    unsigned int quad_vao = 0;
+    unsigned int quad_vbo = 0;
 };
 
 //Singleton class
